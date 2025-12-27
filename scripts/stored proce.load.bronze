@@ -17,7 +17,7 @@ Usage Example:
 ===============================================================================
 */
 
-create or alter procedure bronze.load_bronze as
+CREATE or alter procedure bronze.load_bronze as
 begin
 declare @start_time date,@end_time date,@batch_start date,@batch_end date;
 	begin try
