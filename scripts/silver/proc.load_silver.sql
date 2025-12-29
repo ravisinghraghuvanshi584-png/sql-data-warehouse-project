@@ -232,19 +232,20 @@ begin
 
 		print '>>> inserting data into:table silver.erp_px_cat_g1v2';
 
-		insert into silver.erp_loc_a101(
-			cid,cntry
-			)
+	   insert into silver.erp_px_cat_g1v2
+		(
+			id,
+			cat,
+			subcat,
+			maintenance
+		)
 		select 
-			REPLACE(cid,'-','') as cid,
-			case
-				when trim(cntry) in('US','USA') THEN 'United States'
-				when trim(cntry) ='DE' then'Germany'
-				when trim(cntry) is null then'n/a'
-				when trim(cntry)='' then 'n/a'
-				else trim(cntry)
-			end as cntry
-		from bronze.erp_loc_a101;
+			id,
+			cat,
+			subcat,
+			maintenance
+		from bronze.erp_px_cat_g1v2
+
 
 		set @end_time = getdate();
 			print'>>> load duration: ' + cast(datediff(second,@start_time,@end_time) as nvarchar)+'seconds';
