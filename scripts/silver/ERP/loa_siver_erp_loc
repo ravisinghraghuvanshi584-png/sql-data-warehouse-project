@@ -1,0 +1,18 @@
+IF OBJECT_ID('silver.erp_loc_a101', 'U') IS NOT NULL
+BEGIN
+    TRUNCATE TABLE silver.erp_loc_a101;
+END;
+
+insert into silver.erp_loc_a101(
+cid,cntry
+)
+select 
+REPLACE(cid,'-','') as cid,
+case
+	when trim(cntry) in('US','USA') THEN 'United States'
+	when trim(cntry) ='DE' then'Germany'
+	when trim(cntry) is null then'n/a'
+	when trim(cntry)='' then 'n/a'
+	else trim(cntry)
+end as cntry
+from bronze.erp_loc_a101;
